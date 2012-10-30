@@ -1,0 +1,30 @@
+package world {
+	
+	import display.LineFields;
+	import entity.enemy.Pinrose;
+	import entity.enemy.Sploder;
+	import entity.Player;
+	import net.flashpunk.Entity;
+	import net.flashpunk.World;
+	
+	/**
+	 * ...
+	 * @author Martin L. Fracker, Jr.
+	 */
+	public class WorldMain extends World {
+		
+		public function WorldMain() {
+			add(new LineFields);
+			
+			var player:Entity = new Player(160, 450) as Entity;
+			add(player);
+			
+			add(new Sploder(160, -50));
+		}
+		
+		override public function update():void {
+			
+			super.update();
+		}
+	}
+}
