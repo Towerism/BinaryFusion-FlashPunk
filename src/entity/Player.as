@@ -53,7 +53,7 @@ package entity {
 		private function collisions():void {
 			var b:Bullet = collide(GC.TYPE_PROJECTILE_ENEMY, x, y) as Bullet;
 			if (b) {
-				if (b.color != color) destroy();
+				if (b.color != color) damage(b);
 				b.destroy();
 			}
 		}
