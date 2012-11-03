@@ -10,6 +10,7 @@ package entity {
 	public class Bullet extends BinaryEntity {
 		
 		private var velocity:EuclideanVector;
+		protected var _dmg:int = 1;
 		
 		public function Bullet(color:int, x:Number, y:Number, velocity:EuclideanVector) {
 			super(x, y);
@@ -24,6 +25,10 @@ package entity {
 			y += Math.sin(velocity.angle()) * velocity.magnitude() * FP.elapsed;
 			
 			if (isOutOfBounds()) destroy();
+		}
+		
+		public function get dmg():int {
+			return _dmg;
 		}
 	}
 }
