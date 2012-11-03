@@ -6,6 +6,7 @@ package entity {
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Spritemap;
 	import net.flashpunk.Mask;
+	import util.enum.Reason;
 	
 	/**
 	 * ...
@@ -24,12 +25,31 @@ package entity {
 			this.world.remove(this);
 		}
 		
+		protected function destroyReason(reason:Reason):void {
+			switch (reason) {
+				case Reason.Bounds:
+					onOutOfBounds();
+					destroy();
+					break;
+				case Reason.Death:
+					onDeath();
+					destroy();
+					break;
+				case Reason.Explode:
+					onExplode();
+					destroy();
+					break;
+			}
+		}
+		
 		protected function isOutOfBounds():Boolean {
 			return (x < -halfWidth || y < -halfHeight || x > FP.width + halfWidth || y > FP.height + halfHeight);
 		}
 		
 		public function get color():int {
-			return _sprite.frame;
+			if (_sprite != null)
+				return _sprite.frame;
+			return 0;
 		}
 		
 		public function set color(value:int):void {
@@ -48,5 +68,9 @@ package entity {
 			Image(graphic).centerOO();
 			_sprite.frame = _color;
 		}
+		
+		protected function onOutOfBounds():void { }
+		protected function onDeath():void { }
+		protected function onExplode():void { }
 	}
 }
