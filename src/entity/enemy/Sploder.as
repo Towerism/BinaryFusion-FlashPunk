@@ -1,11 +1,11 @@
 package entity.enemy {
-	
-	import com.greensock.easing.Quad;
-	import com.greensock.TweenMax;
+
 	import entity.bullet.BulletEnemy;
 	import entity.Enemy;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Spritemap;
+	import net.flashpunk.Tween;
+	import net.flashpunk.utils.Ease;
 	import util.enum.Reason;
 	import util.EuclideanVector;
 	
@@ -21,7 +21,7 @@ package entity.enemy {
 			sprite = new Spritemap(Asset.GFX_ENEMY_SPLODER, 34, 34);
 			setHitbox(28, 28, 14, 14);
 			deltaAngle = 360;
-			TweenMax.to(this, 1.5, { y:100, ease:Quad.easeOut, onComplete:onMoveTween } );
+			FP.tween(this, { y:100 }, 1.5, { ease:Ease.quadOut, complete:onMoveTween } );
 		}
 		
 		override protected function onExplode():void {
@@ -33,7 +33,7 @@ package entity.enemy {
 		}
 		
 		private function onMoveTween():void {
-			FP.alarm(1, onMoveAlarm);
+			if (active) FP.alarm(1, onMoveAlarm);
 		}
 		
 		private function onMoveAlarm():void {
