@@ -26,6 +26,7 @@ package entity {
 		}
 		
 		protected function destroyReason(reason:Reason):void {
+			if (!world) return;
 			switch (reason) {
 				case Reason.Bounds:
 					onOutOfBounds();
