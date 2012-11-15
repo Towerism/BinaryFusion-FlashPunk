@@ -1,4 +1,5 @@
 package entity.enemy {
+	
 	import entity.Enemy;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Image;
@@ -21,10 +22,9 @@ package entity.enemy {
 		override public function added():void {
 			var image:Vector.<Image> = new Vector.<Image>;
 			for (var i:int = 0; i < 2; i++) {
-				children[i] = addChild();
+				addChild();
 				children[i].sprite = new Spritemap(Asset.GFX_ENEMY_TWOFACE, 32, 37);
 				image[i] = Image(children[i].graphic);
-				if (i == 1) image[i].flipped = true;
 			}
 			
 			children[0].mask = new Pixelmask(Asset.MASK_TWOFACE_LEFT, -32, -19)
@@ -34,14 +34,9 @@ package entity.enemy {
 			children[1].mask = new Pixelmask(Asset.MASK_TWOFACE_RIGHT, 0, -19);
 			children[1].color = int(!children[0].color);
 			image[1].originX = 0;
+			image[1].flipped = true;
 			
 			super.added();
-		}
-		
-		override public function update():void {
-			trace(x, y);
-			
-			super.update();
 		}
 	}
 }
