@@ -1,7 +1,9 @@
 package entity {
+	
 	import flash.geom.Point;
 	import net.flashpunk.Entity;
 	import net.flashpunk.Mask;
+	
 	/**
 	 * ...
 	 * @author Martin L. Fracker, Jr.
@@ -16,10 +18,10 @@ package entity {
 			
 			this.parent = parent;
 		}
+		
 		override public function update():void {
 			if (follow) {
-				x = parent.x;
-				y = parent.y;
+				velocity = parent.getVelocity();
 			}
 			
 			super.update();
